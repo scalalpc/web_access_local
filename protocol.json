@@ -1,0 +1,182 @@
+
+cmd:
+/*
+ * auth
+ * app_run
+ * cpu_read_info
+ * custom
+ * custom_binary
+ * file_read_data
+ * file_read_data_binary
+ * file_read_meta
+ * mac_read_info
+ * machine_read_guid
+ * reg_read_value
+ * udisk_read_list
+ **/
+
+//message数据，注意：字段名必须用双引号，非字符串型的字段值不能用引号
+
+auth message:
+{
+	"sn": "0",	//0
+	"cmd": "auth",
+	"args": "",	//authentication code
+}
+
+auth reply:
+{
+	"sn": "0",	//0
+	"result": "bool",	//success or fail
+	"remark": "", //empty string
+}
+
+app_run message:
+{
+	"sn": "uint value",	//sequence number
+	"cmd": "app_run",
+	"args": "",	//arguments
+}
+
+app_run reply:
+{
+	"sn": "uint value",	//sequence number of message
+	"result": "bool",	//success or fail
+	"remark": "", //error message
+}
+
+cpu_read_info message:
+{
+	"sn": "uint value",	//sequence number
+	"cmd": "cpu_read_info",
+}
+
+cpu_read_info reply:
+{
+	"sn": "uint value",	//sequence number of message
+	"result": "",	//CPU info
+	"remark": "", //error message
+}
+
+custom message:
+{
+	"sn": "uint value",	//sequence number
+	"cmd": "custom",	//custom command
+	"args": "",	//arguments
+}
+
+custom reply:
+{
+	"sn": "uint value",	//sequence number of message
+	"result": "",	//text
+	"remark": "", //error message
+}
+
+custom_binary message:
+{
+	"sn": "uint value",	//sequence number
+	"cmd": "custom_binary",	//custom command
+	"args": "",	//arguments
+}
+
+custom_binary reply:
+{
+	"sn": "uint value",	//sequence number of message
+	"result": "binary value",	//binary
+	"remark": "", //error message
+}
+
+file_read_data message:
+{
+	"sn": "uint value",	//sequence number
+	"cmd": "file_read_data",
+	"args": "",	//file path
+}
+
+file_read_data reply:
+{
+	"sn": "uint value",	//sequence number of message
+	"result": "",	//text
+	"remark": "", //error message
+}
+
+file_read_data_binary message:
+{
+	"sn": "uint value",	//sequence number
+	"cmd": "file_read_data_binary",
+	"args": "",	//file path
+}
+
+file_read_data_binary reply:
+{
+	"sn": "uint value",	//sequence number of message
+	"result": "binary value",	//binary
+	"remark": "", //error message
+}
+
+file_read_meta message:
+{
+	"sn": "uint value",	//sequence number
+	"cmd": "file_read_meta",
+	"args": "",	//file path
+}
+
+file_read_meta reply:
+{
+	"sn": "uint value",	//sequence number of message
+	"result": "",	//file info, split with '\r\n' 
+	"remark": "", //error message
+}
+
+mac_read_info message:
+{
+	"sn": "uint value",	//sequence number
+	"cmd": "mac_read_info",
+}
+
+mac_read_info reply:
+{
+	"sn": "uint value",	//sequence number of message
+	"result": "",	//mac address
+	"remark": "", //error message
+}
+
+machine_read_guid message:
+{
+	"sn": "uint value",	//sequence number
+	"cmd": "machine_read_guid",
+}
+
+machine_read_guid reply:
+{
+	"sn": "uint value",	//sequence number of message
+	"result": "",	//machine guid
+	"remark": "", //error message
+}
+
+reg_read_value message:
+{
+	"sn": "uint value",	//sequence number
+	"cmd": "reg_read_value",
+	"args": "",	//reg item path, replacy \ with /
+}
+
+reg_read_value reply:
+{
+	"sn": "uint value",	//sequence number of message
+	"result": "",	//reg item value
+	"remark": "", //error message
+}
+
+udisk_read_list message:
+{
+	"sn": "uint value",	//sequence number
+	"cmd": "udisk_read_list",
+}
+
+udisk_read_list reply:
+{
+	"sn": "uint value",	//sequence number of message
+	"result": "",	//udisk list
+	"remark": "", //error message
+}

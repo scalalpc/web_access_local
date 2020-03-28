@@ -1,0 +1,7 @@
+E:\mygo\src\web_access_local\web_access_local_setup\bin\Debug\web_access_local_setup.exe
+E:\mygo\src\web_access_local\web_access_local_setup\bin\Debug\web_access_local_setup.pdb
+E:\mygo\src\web_access_local\web_access_local_setup\obj\Debug\web_access_local_setup.MainForm.resources
+E:\mygo\src\web_access_local\web_access_local_setup\obj\Debug\web_access_local_setup.Properties.Resources.resources
+E:\mygo\src\web_access_local\web_access_local_setup\obj\Debug\web_access_local_setup.csproj.GenerateResource.Cache
+E:\mygo\src\web_access_local\web_access_local_setup\obj\Debug\web_access_local_setup.exe
+E:\mygo\src\web_access_local\web_access_local_setup\obj\Debug\web_access_local_setup.pdb
