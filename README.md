@@ -1,17 +1,27 @@
 # web_access_local
  A local service program, providing websocket interface for web pages, accessing local resources and system calls.
  
+ 
 1. Supported features
 
 (1) Run the local application.
+
 (2) Read the contents of the file.
+
 (3) Read the file meta information.
+
 (4) Read the registry.
+
 (5) Read CPU information.
+
 (6) Read memory information.
+
 (7) Read the machine code.
+
 (8) Read the U disk information.
+
 (9) Customize the command.
+
 
 2. Installation configuration
 
