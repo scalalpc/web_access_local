@@ -1,6 +1,3 @@
-// Copyright 2020 The web_access_local Authors. All rights reserved.
-// Use of this source code is governed by a GPL-style license that can be found in the LICENSE file.
-
 // web_access_local project main.go
 package main
 
@@ -22,6 +19,7 @@ import (
 )
 
 func main() {
+
 	http.Handle("/access", websocket.Handler(access))
 	http.HandleFunc("/index", index)
 	http.HandleFunc("/", index)
@@ -33,39 +31,18 @@ func main() {
 
 func index(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(200)
-	w.Write([]byte("ok"))
+	w.Write([]byte("正常"))
 }
 
 func access(ws *websocket.Conn) {
 	var err error
-	var recvData, recvPending, message, reply string
-	var splitIndex int
-	var msgArr []string
-	var spliter = "\r\n\r\n"
+	var message, reply string
 	var authed = false
 
 	defer ws.Close()
 
 	for {
-		message = ""
-		msgArr = msgArr[0:0]
-		if err = websocket.Message.Receive(ws, &recvData); err == nil {
-			if len(recvData) > 0 {
-				recvPending += recvData
-				for {
-					splitIndex = strings.Index(recvPending, spliter)
-					if splitIndex >= 0 {
-						message = recvPending[:splitIndex]
-						if len(message) > 0 {
-							msgArr = append(msgArr, message)
-						}
-						recvPending = recvPending[splitIndex+len(spliter):]
-					} else {
-						break
-					}
-				}
-			}
-		} else {
+		if err = websocket.Message.Receive(ws, &message); err != nil {
 			if err == io.EOF {
 				fmt.Println("client close")
 				break
@@ -74,17 +51,13 @@ func access(ws *websocket.Conn) {
 			continue
 		}
 
-		for _, msg := range msgArr {
-			reply = processMessage(msg, &authed)
-			err = websocket.Message.Send(ws, reply)
-			if err != nil {
-				fmt.Println(fmt.Sprintf("err: %v", err))
-			}
-			if authed {
-				continue
-			} else {
-				return
-			}
+		reply = processMessage(message, &authed)
+		err = websocket.Message.Send(ws, reply)
+		if err != nil {
+			fmt.Println(fmt.Sprintf("err: %v", err))
+		}
+		if !authed {
+			return
 		}
 	}
 }

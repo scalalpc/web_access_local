@@ -15,9 +15,7 @@ cmd:
  * udisk_read_list
  **/
 
-//Note: field names must be in double quotation marks, and non string field values cannot be in quotation marks.
-
-//Note: the message content ends with "\r\n\r\n".
+//message数据，注意：字段名必须用双引号，非字符串型的字段值不能用引号
 
 auth message:
 {

@@ -2,12 +2,24 @@
   <head>
     <script>
       var ws = new WebSocket("ws://127.0.0.1:2468/access");
-
+      //readyState属性返回实例对象的当前状态，共有四种。
+      //CONNECTING：值为0，表示正在连接。
+      //OPEN：值为1，表示连接成功，可以通信了。
+      //CLOSING：值为2，表示连接正在关闭。
+      //CLOSED：值为3，表示连接已经关闭，或者打开连接失败
+      //例如：if (ws.readyState == WebSocket.CONNECTING) { }
+       
+      //【用于指定连接成功后的回调函数】
       ws.onopen = function (evt) {
         console.log("Connection open ...");
-        ws.send('{"sn":0,"cmd":"auth","args":"123456789"}\r\n\r\n');
+        ws.send('{"sn":0,"cmd":"auth","args":"123456789"}');
       };
+      //ws.addEventListener('open', function (event) {
+      //    ws.send('Hello Server!');
+      //};
        
+      //【用于指定收到服务器数据后的回调函数】
+      //【服务器数据有可能是文本，也有可能是二进制数据，需要判断】
       ws.onmessage = function (event) {
               if (typeof event.data === String) {
                   console.log("Received data string");
@@ -18,42 +30,92 @@
                   console.log("Received arraybuffer");
               }
           console.log("Received Message: " + event.data);
+ //         ws.close();
       };
        
+      //[【于指定连接关闭后的回调函数。】
       ws.onclose = function (evt) {
           console.log("Connection closed.");
       };
-
+       
+      /*
+      //发送文本
+      ws.send("Hello WebSockets!");
+      //发送Blob数据
+      var file = document
+          .querySelector('input[type="file"]')
+          .files[0];
+      ws.send(file);
+      //发送ArrayBuffer
+      var img = canvas_context.getImageData(0, 0, 400, 320);
+      var binary = new Uint8Array(img.data.length);
+      for (var i = 0; i < img.data.length; i++) {
+          binary[i] = img.data[i];
+      }
+      ws.send(binary.buffer);
+       
+      //webSocket.bufferedAmount
+      //bufferedAmount属性，表示还有多少字节的二进制数据没有发送出去。它可以用来判断发送是否结束
+      var data = new ArrayBuffer(10000000);
+      socket.send(data);
+       
+      if (socket.bufferedAmount === 0) {
+          // 发送完毕
+      } else {
+          // 发送还没结束
+      }
+       */
+      
+      //webSocket.onerror 用于指定报错时的回调函数
+       
       ws.onerror = function (event) {
       };
-
+       
+      /*
+      es.addEventListener("error", function (event) {
+      });
+      */
+      
       var sn = 1;
       function sendAppRunMessage() {
-        ws.send('{"sn":' + (sn++)+ ',"cmd":"app_run","args":"calc.exe"}\r\n\r\n');
+        //text
+        ws.send('{"sn":' + (sn++)+ ',"cmd":"app_run","args":"calc.exe"}');
+        //binary
+        /*
+        var binary = new Uint8Array(12);
+        for (var i = 0; i < binary.length; i ++) {
+          binary[i] = 0x30 + i;
+        }
+        binary[5] = 0x0d;
+        binary[6] = 0x0a;
+        binary[7] = 0x0d;
+        binary[8] = 0x0a;
+        ws.send(binary.buffer);
+        */
       }
       function sendCpuReadInfoMessage() {
-        ws.send('{"sn":' + (sn++)+ ',"cmd":"cpu_read_info"}\r\n\r\n');
+        ws.send('{"sn":' + (sn++)+ ',"cmd":"cpu_read_info"}');
       }
       function sendMacReadInfoMessage() {
-        ws.send('{"sn":' + (sn++)+ ',"cmd":"mac_read_info"}\r\n\r\n');
+        ws.send('{"sn":' + (sn++)+ ',"cmd":"mac_read_info"}');
       }
       function sendMachineReadGuidMessage() {
-        ws.send('{"sn":' + (sn++)+ ',"cmd":"machine_read_guid"}\r\n\r\n');
+        ws.send('{"sn":' + (sn++)+ ',"cmd":"machine_read_guid"}');
       }
       function sendRegReadValueMessage() {
-        ws.send('{"sn":' + (sn++)+ ',"cmd":"reg_read_value","args":"/HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/DataAccess,Full21Install"}\r\n\r\n');
+        ws.send('{"sn":' + (sn++)+ ',"cmd":"reg_read_value","args":"/HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/DataAccess,Full21Install"}');
       }
       function sendFileReadMetaMessage() {
-        ws.send('{"sn":' + (sn++)+ ',"cmd":"file_read_meta","args":"D:/360Downloads/Debuggers/adplus.doc"}\r\n\r\n');
+        ws.send('{"sn":' + (sn++)+ ',"cmd":"file_read_meta","args":"D:/360Downloads/Debuggers/adplus.doc"}');
       }
       function sendFileReadDataMessage() {
-        ws.send('{"sn":' + (sn++)+ ',"cmd":"file_read_data","args":"D:/360Downloads/Debuggers/license.txt"}\r\n\r\n');
+        ws.send('{"sn":' + (sn++)+ ',"cmd":"file_read_data","args":"D:/360Downloads/Debuggers/license.txt"}');
       }
       function sendFileReadDataBinaryMessage() {
-        ws.send('{"sn":' + (sn++)+ ',"cmd":"file_read_data_binary","args":"D:/360Downloads/Debuggers/license.txt"}\r\n\r\n');
+        ws.send('{"sn":' + (sn++)+ ',"cmd":"file_read_data_binary","args":"D:/360Downloads/Debuggers/license.txt"}');
       }
       function sendUDiskReadListMessage() {
-        ws.send('{"sn":' + (sn++)+ ',"cmd":"udisk_read_list"}\r\n\r\n');
+        ws.send('{"sn":' + (sn++)+ ',"cmd":"udisk_read_list"}');
       }
     </script>
   </head>
